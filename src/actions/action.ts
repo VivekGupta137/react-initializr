@@ -5,16 +5,22 @@ import { z } from "zod";
 import prisma from "../../prisma";
 import { DBConnect } from "@/lib/dbutils";
 import { revalidatePath } from "next/cache";
+import { metadata } from "@/app/layout";
+import { load_metadata } from "@/lib/dataUtils";
 
 export async function actionAddTemplate(
   data: z.infer<typeof templateFormSchema>
 ) {
-  const resp = await fetch(data.url, {
+  // test if the url is valid
+  templateFormSchema.parse(data);
+
+  const packageJsonResp = await fetch(data.url, {
     method: "GET",
   });
-  const packageJson = await resp.json();
+  const packageJson = await packageJsonResp.json();
   const dependencies = packageJson.dependencies || {};
   const devDependencies = packageJson.devDependencies || {};
+
 
   const templateDoc = {
     name: packageJson.name,
@@ -34,6 +40,9 @@ export async function actionAddTemplate(
         })),
       ]
     },
+    metadata: {
+      create: await load_metadata(data.url)
+    }
   };
 
   await DBConnect();

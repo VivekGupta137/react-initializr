@@ -30,7 +30,12 @@ const ViewFilteredTemplate = async ({
 
       <div className="flex flex-col gap-2 w-full">
         {templates.map(({ name, description, url }) => (
-          <TemplateItem key={url} name={name} description={description} />
+          <TemplateItem key={url} name={name} url={url} description={description} />
+        ))}
+      </div>
+      <div>
+        {templates.map(({ name, description, url }) => (
+          <div>{url}</div>
         ))}
       </div>
     </div>
