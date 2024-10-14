@@ -20,9 +20,9 @@ import { templateFormSchema, templateInitialState } from "@/lib/formType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import FormSubmitButton from "@/components/FormSubmitButton";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const TemplateForm = () => {
+const TemplateForm = ({dialogOpen}: {dialogOpen: Dispatch<SetStateAction<boolean>>}) => {
   const form = useForm<z.infer<typeof templateFormSchema>>({
     resolver: zodResolver(templateFormSchema),
     defaultValues: templateInitialState,
@@ -33,9 +33,8 @@ const TemplateForm = () => {
   const onSubmit = async (data: z.infer<typeof templateFormSchema>) => {
     setPending(true);
     const resp = await actionAddTemplate(data);
-    console.log({ resp });
-
     setPending(false);
+    dialogOpen(false);
   };
   return (
     <div>

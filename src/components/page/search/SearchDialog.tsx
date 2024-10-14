@@ -35,8 +35,8 @@ const SearchDialog = () => {
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>
-          <SearchButton />
+        <DialogTrigger asChild>
+          <SearchButton handleOpen={setOpen} />
         </DialogTrigger>
         <DialogContent >
           <DialogHeader>
