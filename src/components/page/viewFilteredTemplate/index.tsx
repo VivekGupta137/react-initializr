@@ -1,70 +1,38 @@
 import "server-only";
 import prisma from "../../../../prisma";
 import { getPkgFilters } from "@/lib/filterUtils";
+import ShowActiveFilter from "./ShowActiveFilter";
+import SearchButton from "../search/SearchButton";
+import TemplateItem from "./TemplateItem";
 
 const ViewFilteredTemplate = async ({
   searchParams,
 }: {
   searchParams: Record<string, string>;
 }) => {
-  // getPkgFilters(searchParams);
-    
-    const filter = getPkgFilters(searchParams);
-    console.log({filters: JSON.stringify(filter, null, 2)});
+  const filter = getPkgFilters(searchParams);
+  console.log({ filters: JSON.stringify(filter, null, 2) });
   const templates = await prisma.template.findMany({
     where: {
-        ...filter
-    //   AND: [
-    //     {
-    //         dependencies: {
-    //             some: {
-    //                 name: {
-    //                     contains: "react",
-    //                     mode: "insensitive"
-    //                 }
-    //             },
-    //           },
-    //     },
-    //     {
-    //         dependencies: {
-    //             some: {
-    //                 name: {
-    //                     contains: "tailwindcss",
-    //                     mode: "insensitive"
-    //                 }
-    //             },
-    //           },
-    //     }
-    //   ],
-    },
-    include: {
-      dependencies: true,
+      ...filter,
     },
   });
+  
 
   return (
     <div>
-      <h1>ViewFilteredTemplate</h1>
-      <p>searchParams: {JSON.stringify(searchParams)}</p>
-      {templates.map((template) => (
-        <div key={template.id} className="border my-5">
-          <h2>{template.name}</h2>
-          <p>{template.description}</p>
-          {/* <ul>
-            {template.dependencies.map(({ name, version }) => {
-              return (
-                <li key={name}>
-                  {name}={version}
-                </li>
-              );
-            })}
-          </ul> */}
-          <p>{template.url}</p>
-        </div>
-      ))}
+      <div className="flex flex-col border-b py-3 mb-5">
+        <h1 className="text-lg font-bold">Templates: </h1>
+        <ShowActiveFilter />
+      </div>
+
+      <div className="flex flex-col gap-2 w-full">
+        {templates.map(({ name, description, url }) => (
+          <TemplateItem key={url} name={name} description={description} url={url} />
+        ))}
+      </div>
     </div>
   );
 };
-
 
 export default ViewFilteredTemplate;

@@ -1,3 +1,5 @@
+import { PackageListType } from "@/components/page/filters/PackageFilter";
+import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { Prisma } from "@prisma/client";
 
 type PkgFilter = Prisma.DependencyWhereInput;
@@ -61,10 +63,10 @@ const makeDepFilter = ({
   return filter;
 };
 
-const extractPkgNameVersion = (pkg: string) => {
+export const extractPkgNameVersion = (pkg: string) => {
   // only split on the last @
   const lastAtIndex = pkg.lastIndexOf("@");
-  if (lastAtIndex === -1) {
+  if (lastAtIndex === -1 || lastAtIndex === 0) {
     return { name: pkg };
   }
   const name = pkg.slice(0, lastAtIndex);
