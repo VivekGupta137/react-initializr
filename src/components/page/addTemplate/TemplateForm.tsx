@@ -1,11 +1,8 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { actionAddTemplate } from "@/actions/action";
-import { useFormState, useFormStatus } from "react-dom";
 import {
   Form,
   FormControl,
@@ -18,7 +15,6 @@ import {
 import { z } from "zod";
 import { templateFormSchema, templateInitialState } from "@/lib/formType";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import FormSubmitButton from "@/components/FormSubmitButton";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -32,7 +28,7 @@ const TemplateForm = ({dialogOpen}: {dialogOpen: Dispatch<SetStateAction<boolean
 
   const onSubmit = async (data: z.infer<typeof templateFormSchema>) => {
     setPending(true);
-    const resp = await actionAddTemplate(data);
+    await actionAddTemplate(data);
     setPending(false);
     dialogOpen(false);
   };

@@ -31,7 +31,7 @@ const TemplateDialog = () => {
           <DialogHeader>
             <DialogTitle>Add Template</DialogTitle>
             <DialogDescription>
-              We just need a few details. Click save when you're done.
+              We just need a few details. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
           <TemplateForm dialogOpen={setOpen} />

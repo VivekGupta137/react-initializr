@@ -1,14 +1,8 @@
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { FilterIcon, SearchIcon } from "lucide-react";
-import { RiFilterFill } from "react-icons/ri";
+import { FilterIcon } from "lucide-react";
+import { SetStateAction } from "react";
 
-const SearchButton = ({handleOpen} : {handleOpen:any}) => {
+const SearchButton = ({handleOpen} : {handleOpen: React.Dispatch<SetStateAction<boolean>>}) => {
   return (
     <Button variant="outline" className="px-2 group bg-muted/50" onClick={()=>handleOpen(true)}>
     <div className="flex gap-2 items-center">

@@ -1,8 +1,5 @@
-import { PackageListType } from "@/components/page/filters/PackageFilter";
-import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { Prisma } from "@prisma/client";
 
-type PkgFilter = Prisma.DependencyWhereInput;
 
 // This function removes all non-numeric characters from a string
 export const cleanVersion = (version: string) => {

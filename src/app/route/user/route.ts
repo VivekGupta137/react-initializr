@@ -2,7 +2,7 @@ import { DBConnect } from "@/lib/dbutils";
 import { NextResponse } from "next/server"
 import prisma from "../../../../prisma";
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
     try {
         await DBConnect();
         const users = await prisma.user.findMany();

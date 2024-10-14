@@ -5,10 +5,9 @@ import { FaClone } from "react-icons/fa6";
 type TemplateItemProps = {
   name: string;
   description?: string | null;
-  url: string;
 };
 
-const TemplateItem = ({ name, description, url }: TemplateItemProps) => {
+const TemplateItem = ({ name, description }: TemplateItemProps) => {
   return (
     <div className="group ">
       <Card className="group-hover:bg-muted duration-200 flex">

@@ -10,8 +10,8 @@ import { filters } from "@/constants/filters";
 import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 
 const Filters = () => {
+  const {packages} = useMultiSearchParam();
     const accordionActiveFilter = (packageList: PackageListType[]) => {
-        const {packages} = useMultiSearchParam();
         const packageItem = packageList.find((pack) => packages.map(({name})=>name).includes(pack.value))?.value ??
         "";
         const packageName = packageList.find((pack) => pack.value === packageItem)?.label ?? "";
