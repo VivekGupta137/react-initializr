@@ -29,7 +29,7 @@ const TemplateDialog = () => {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Add Template</DialogTitle>
+            <DialogTitle>Share Template</DialogTitle>
             <DialogDescription>
               We just need a few details. Click save when you&apos;re done.
             </DialogDescription>
