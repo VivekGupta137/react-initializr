@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     const templates = await prisma.template.findMany({
         where: {
             updatedAt: {
-                lt: new Date(new Date().getTime() - 1000 * 60 * 60 )
+                lt: new Date(new Date().getTime() - 1000 * 60 )
             }
         },
         take: 10
