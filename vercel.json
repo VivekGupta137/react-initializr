@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/route/update",
+      "schedule": "*/5 * * * *"
+    }
+  ]
+}
