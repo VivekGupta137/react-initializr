@@ -20,6 +20,7 @@ export async function GET(request: Request) {
         },
         take: 10
     });
+    
     const ghUrls = templates.map(({ url }) => url);
 
     const templateData = await Promise.all(
