@@ -9,16 +9,17 @@ import {
 
 export const dynamic = "force-dynamic"; // static by default, unless reading the request
 
+export type TemplateType = Awaited<ReturnType<typeof prisma.template.findMany>>;
+
 export async function GET(request: Request) {
   try {
     await DBConnect();
     const templates = await prisma.template.findMany({
         where: {
             updatedAt: {
-                lt: new Date(new Date().getTime() - 1000 * 60 )
+                lt: new Date(new Date().getTime() - 1000)
             }
         },
-        take: 10
     });
     
     const ghUrls = templates.map(({ url }) => url);

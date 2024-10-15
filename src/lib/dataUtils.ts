@@ -1,6 +1,7 @@
 import "server-only"
 import { Prisma } from "@prisma/client";
 import prisma from "../../prisma";
+import { TemplateType } from "@/app/route/update/route";
 
 export const load_pkg_json = async (url: string) => {
   const packageJsonResp = await fetch(url, {
@@ -63,24 +64,28 @@ export const extract_full_name = (url: string) => {
   return fullName;
 };
 
-export async function updateTemplateDependencies(templates: any[], templateData: any[]) {
+type ProcessGitHubUrlReturnType = Awaited<ReturnType<typeof processGitHubUrl>>
+
+export async function updateTemplateDependencies(templates: TemplateType, templateData: ProcessGitHubUrlReturnType[]) {
+    
     // Remove dependencies
     await Promise.all(templates.map(async (template) => {
-        await prisma.dependency.deleteMany({
-            where: { templateId: template.id }
-        });
+        if(!template.id)
+            await prisma.dependency.deleteMany({
+                where: { templateId: template.id }
+            });
     }));
 
     // Add new dependencies
     await Promise.all(templates.map(async (template) => {
-        const dependencies = templateData.find(t => t.url === template.url)?.dependencyData ?? [];
+        const dependencies = templateData.find(t => t.url === template.url.toString())?.dependencyData ?? [];
         await prisma.dependency.createMany({
             data: dependencies
         });
     }));
 }
 
-export async function upsertTemplateMetadata(template: any, id: string) {
+export async function upsertTemplateMetadata(template: ProcessGitHubUrlReturnType, id: string) {
     const metadataUpdate = template.templateDoc.metadata as Prisma.TemplateMetadataUpdateInput;
     const metadataCreate = {
         ...metadataUpdate,
@@ -100,7 +105,7 @@ export async function upsertTemplateMetadata(template: any, id: string) {
     ]);
 }
 
-export async function processGitHubUrl(url: string, templates: any[]): Promise<{ url: string, templateDoc: any, dependencyData: Prisma.DependencyCreateManyInput[] }> {
+export async function processGitHubUrl(url: string, templates: TemplateType) {
     const fullName = extract_full_name(url);
     const { name, description, dependencies } = await load_pkg_json(url);
     const metadataUrl = `https://api.github.com/repos/${fullName}`;

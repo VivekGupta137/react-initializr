@@ -3,6 +3,10 @@
     {
       "path": "/route/update",
       "schedule": "0 0 * * *"
-    }
+    },
+    {
+        "path": "/route/update",
+        "schedule": "0 12 * * *"
+      }
   ]
 }
