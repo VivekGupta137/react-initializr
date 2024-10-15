@@ -35,7 +35,7 @@ const ViewFilteredTemplate = async ({
       </div>
       <div>
         {templates.map(({ name, description, url }) => (
-          <div>{url}</div>
+          <div key={url}>{url}</div>
         ))}
       </div>
     </div>
