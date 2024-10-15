@@ -16,8 +16,10 @@ const ViewFilteredTemplate = async ({
     where: {
       ...filter,
     },
+    include: {
+      metadata: true,
+    }
   });
-  
 
   return (
     <div>
@@ -29,14 +31,11 @@ const ViewFilteredTemplate = async ({
       </div>
 
       <div className="flex flex-col gap-2 w-full">
-        {templates.map(({ name, description, url }) => (
-          <TemplateItem key={url} name={name} url={url} description={description} />
+        {templates.map(({ name, description, url, metadata }) => (
+          <TemplateItem key={url} name={name} url={url} description={description} metadata={metadata} />
         ))}
       </div>
       <div>
-        {templates.map(({ name, description, url }) => (
-          <div key={url}>{url}</div>
-        ))}
       </div>
     </div>
   );
