@@ -20,7 +20,9 @@ export default async function Home({ searchParams }: HomeProps) {
           </Suspense>
         </div>
         <div className="shrink grow">
-          <ViewFilteredTemplate searchParams={searchParams} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ViewFilteredTemplate searchParams={searchParams} />
+          </Suspense>
         </div>
       </div>
     </div>

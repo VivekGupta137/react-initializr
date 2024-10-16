@@ -93,3 +93,7 @@ export function nFormatter(num: number, digits: number) {
   const item = lookup.findLast(item => num >= item.value);
   return item ? (num / item.value).toFixed(digits).replace(regexp, "").concat(item.symbol) : "0";
 }
+
+export const updatePkgNames = (name: string)=>{
+  return name.replace(/@/g, "").replace(/\//g, "-").replace(/\$/g, "");
+}

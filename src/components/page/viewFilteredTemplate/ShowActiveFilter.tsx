@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/tooltip";
 import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { useSearchParams } from "next/navigation";
+import ClosingBadge from "./ClosingBadge";
 
 const ShowActiveFilter = () => {
   const searchParams = useSearchParams();
@@ -23,13 +24,9 @@ const ShowActiveFilter = () => {
         {depTags.map((tag) => (
           <Tooltip key={tag}>
             <TooltipTrigger>
-              <Badge
-                variant={"secondary"}
-                className="hover:bg-red-700 hover:cursor-pointer"
-                onClick={() => removeSearchParam("pkg", tag)}
-              >
+              <ClosingBadge onClick={() => removeSearchParam("pkg", tag)}>
                 {tag}
-              </Badge>
+              </ClosingBadge>
             </TooltipTrigger>
             <TooltipContent>
               <p>Remove {tag} filter</p>
