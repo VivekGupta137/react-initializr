@@ -2,13 +2,14 @@ import { filters } from "@/constants/filters";
 import { Radio, RadioGroup } from "@nextui-org/react";
 import "server-only";
 import { Button } from "../ui/button";
+import SearchDialog from "./search/SearchDialog";
 
 const RadioFilters = async () => {
   return (
     <div className="flex flex-col gap-6 pr-5">
       <div className="flex justify-between border-b pb-2">
         <h2 className="text-primary text-xl font-bold">Filters</h2>
-        <Button variant={"outline"}>Custom Filters</Button>
+        <SearchDialog />
       </div>
       {filters.map(({ title, filters }) => (
         <div key={title}>

@@ -105,8 +105,8 @@ const TemplateItem = ({
   };
 
   return (
-    <div className="group">
-      <Card className="group-hover:bg-muted duration-200 flex">
+    <div className="group border-b">
+      <div className="group-hover:bg-muted duration-200 flex">
         <div className="py-2 flex flex-col gap-2 px-3 grow shrink">
           <div className="flex gap-2 items-center">
             <div className="rounded-sm overflow-hidden">
@@ -128,7 +128,7 @@ const TemplateItem = ({
               </Link>
             </div>
           </div>
-          <p>{description}</p>
+          <p className="text-muted-foreground">{description}</p>
           <div className="flex">
             <div className="flex gap-1 items-center ml-3">
               <PiStarFill className=" fill-yellow-300" width={30} />
@@ -148,7 +148,7 @@ const TemplateItem = ({
                 {nFormatter(metadata?.forksCount ?? 0, 1)}
               </span>
             </div>
-            
+
             {metadata?.language && (
               <div className="flex gap-2 ml-3 items-center">
                 <div>
@@ -174,7 +174,7 @@ const TemplateItem = ({
             Clone
           </CopyButton>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

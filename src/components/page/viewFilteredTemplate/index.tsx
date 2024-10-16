@@ -1,9 +1,10 @@
 import "server-only";
 import prisma from "../../../../prisma";
 import { getPkgFilters } from "@/lib/filterUtils";
-import ShowActiveFilter from "./ShowActiveFilter";
+
 import TemplateItem from "./TemplateItem";
-import { Suspense } from "react";
+
+import AddTemplate from "../addTemplate/AddTemplate";
 
 const ViewFilteredTemplate = async ({
   searchParams,
@@ -18,24 +19,27 @@ const ViewFilteredTemplate = async ({
     },
     include: {
       metadata: true,
-    }
+    },
+    take: 10,
   });
 
   return (
-    <div>
-      <div className="flex flex-col border-b py-3 mb-5">
-        <h1 className="text-lg font-bold">Templates: </h1>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ShowActiveFilter />
-        </Suspense>
+    <div className="flex flex-col gap-6">
+      <div className="flex justify-between border-b pb-2">
+        <h2 className="text-primary text-xl font-bold">Templates</h2>
+        <AddTemplate />
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col w-full overflow-y-auto h-full">
         {templates.map(({ name, description, url, metadata }) => (
-          <TemplateItem key={url} name={name} url={url} description={description} metadata={metadata} />
+          <TemplateItem
+            key={url}
+            name={name}
+            url={url}
+            description={description}
+            metadata={metadata}
+          />
         ))}
-      </div>
-      <div>
       </div>
     </div>
   );
