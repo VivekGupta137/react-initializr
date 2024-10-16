@@ -27,6 +27,27 @@ export const frameworkFilters: PackageListType[] = [
     label: "Remix",
     icon: <RiRemixRunFill className="size-5" />,
   },
+  {
+    value: "next",
+    label: "Next.js",
+    icon: <RiNextjsLine className="size-5" />,
+  },
+  { value: "vue", label: "Vue", icon: <FaVuejs className="size-5" /> },
+  {
+    value: "remix",
+    label: "Remix",
+    icon: <RiRemixRunFill className="size-5" />,
+  },{
+    value: "next",
+    label: "Next.js",
+    icon: <RiNextjsLine className="size-5" />,
+  },
+  { value: "vue", label: "Vue", icon: <FaVuejs className="size-5" /> },
+  {
+    value: "remix",
+    label: "Remix",
+    icon: <RiRemixRunFill className="size-5" />,
+  },
 ];
 export const cssFilters: PackageListType[] = [
   {
