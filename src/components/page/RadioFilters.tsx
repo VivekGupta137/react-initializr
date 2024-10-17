@@ -14,7 +14,6 @@ const RadioFilters = async () => {
       {filters.map(({ title, filters }) => (
         <div key={title}>
           <FilterSection title={title} filters={filters} />
-          
         </div>
       ))}
     </div>
