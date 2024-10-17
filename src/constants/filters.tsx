@@ -13,9 +13,9 @@ import {
   RiRemixRunFill,
   RiTailwindCssLine,
 } from "react-icons/ri";
-import { PackageListType } from "@/components/page/filters/PackageFilter";
+import { FilterType } from "@/components/page/filters/FilterSection";
 
-export const frameworkFilters: PackageListType[] = [
+export const frameworkFilters: FilterType[] = [
   {
     value: "next",
     label: "Next.js",
@@ -28,28 +28,11 @@ export const frameworkFilters: PackageListType[] = [
     icon: <RiRemixRunFill className="size-5" />,
   },
   {
-    value: "next",
-    label: "Next.js",
-    icon: <RiNextjsLine className="size-5" />,
-  },
-  { value: "vue", label: "Vue", icon: <FaVuejs className="size-5" /> },
-  {
-    value: "remix",
-    label: "Remix",
-    icon: <RiRemixRunFill className="size-5" />,
-  },{
-    value: "next",
-    label: "Next.js",
-    icon: <RiNextjsLine className="size-5" />,
-  },
-  { value: "vue", label: "Vue", icon: <FaVuejs className="size-5" /> },
-  {
-    value: "remix",
-    label: "Remix",
-    icon: <RiRemixRunFill className="size-5" />,
+    value: "",
+    label: "Any",
   },
 ];
-export const cssFilters: PackageListType[] = [
+export const cssFilters: FilterType[] = [
   {
     value: "tailwindcss",
     label: "Tailwind",
@@ -60,8 +43,12 @@ export const cssFilters: PackageListType[] = [
     label: "Material UI",
     icon: <SiMui className="size-5" />,
   },
+  {
+    value: "",
+    label: "Any",
+  },
 ];
-export const ormFilters: PackageListType[] = [
+export const ormFilters: FilterType[] = [
   {
     value: "drizzle-orm",
     label: "Drizzle",
@@ -72,9 +59,13 @@ export const ormFilters: PackageListType[] = [
     label: "Prisma",
     icon: <SiPrisma className="size-5" />,
   },
+  {
+    value: "",
+    label: "Any",
+  },
 ];
 
-export const authenticationFilters: PackageListType[] = [
+export const authenticationFilters: FilterType[] = [
   {
     value: "next-auth",
     label: "Next Auth",
@@ -90,9 +81,13 @@ export const authenticationFilters: PackageListType[] = [
     label: "Auth0",
     icon: <SiAuth0 className="size-5" />,
   },
+  {
+    value: "",
+    label: "Any",
+  },
 ];
 
-export const bundlerFilters: PackageListType[] = [
+export const bundlerFilters: FilterType[] = [
   {
     value: "vite",
     label: "Vite",
@@ -107,6 +102,10 @@ export const bundlerFilters: PackageListType[] = [
     value: "esbuild$",
     label: "ESBuild",
     icon: <SiEsbuild className="size-5" />,
+  },
+  {
+    value: "",
+    label: "Any",
   },
 ];
 

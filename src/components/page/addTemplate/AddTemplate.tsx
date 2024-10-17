@@ -3,7 +3,6 @@ import TemplateDialog from "./TemplateDialog";
 
 const AddTemplate = () => {
   return (
-      
       <TemplateDialog />
   );
 };
