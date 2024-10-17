@@ -16,8 +16,6 @@ const ViewFilteredTemplate = async ({
 }) => {
   
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   const getTemplates = cache(async (params) => {
     const filter = getPkgFilters(searchParams);
     
