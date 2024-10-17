@@ -1,8 +1,6 @@
-import { filters } from "@/constants/filters";
-import {RadioGroup, Radio} from "@nextui-org/radio";
 import "server-only";
-import { Button } from "../ui/button";
-import SearchDialog from "./search/SearchDialog";
+
+import { filters } from "@/constants/filters";
 import FilterSection from "./filters/FilterSection";
 import SearchInput from "./search/SearchInput";
 
