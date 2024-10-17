@@ -13,10 +13,10 @@ interface HomeProps {
 export default async function Home({ searchParams }: HomeProps) {
   return (
     <div className="container m-auto sm:px-5 md:px-20 min-h-lvh">
-      <div className="border-l border-r px-5 min-h-lvh">
+      <div className="border-l border-r px-5 min-h-lvh flex flex-col h-full">
         <Header />
 
-        <div className="flex gap-0 px-2 sm:px-0 flex-col lg:flex-row pb-20">
+        <div className="flex gap-0 px-2 sm:px-0 flex-col lg:flex-row pb-20 self-stretch">
           <div className="basis-1/2 shrink-0 my-10 lg:border-r-1">
             <Suspense fallback={<div>Loading...</div>}>
               <RadioFilters />
