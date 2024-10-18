@@ -145,7 +145,7 @@ const TemplateItem = ({
             <div className="flex gap-1 items-center ml-3">
               <FaBinoculars className="text-gray-500" width={30} />
               <span className="text-sm text-muted-foreground">
-                {nFormatter(metadata?.forksCount ?? 0, 1)}
+                {nFormatter(metadata?.watchersCount ?? 0, 1)}
               </span>
             </div>
 

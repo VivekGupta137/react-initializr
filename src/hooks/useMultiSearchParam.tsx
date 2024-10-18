@@ -34,21 +34,34 @@ const useMultiSearchParam = () => {
     const fields = searchParams.getAll(key);
     const params = new URLSearchParams(searchParams.toString());
     params.delete(key);
+    const valueArray = value.split(/\s+/).filter((v) => v.length > 0);
+    const prevArray = prev.split(/\s+/).filter((v) => v.length > 0);
     fields
       .filter(
         (field) =>
-          extractPkgNameVersion(field).name !== prev &&
-          extractPkgNameVersion(field).name !== value
+          !valueArray.includes(extractPkgNameVersion(field).name) &&
+          !prevArray.includes(extractPkgNameVersion(field).name)
       )
       .forEach((field) => params.append(key, field));
-    if (value) params.append(key, value);
+    if (valueArray.length > 0) {
+      valueArray.forEach((val) => {
+        params.append(key, val);
+      })
+    }
     router.push(`?${params.toString()}`);
   };
+
+  const clearAllSearchParam = (key: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete(key);
+    router.push(`?${params.toString()}`);
+  }
 
   return {
     addSearchParam,
     removeSearchParam,
     updateSearchParam,
+    clearAllSearchParam,
     params: searchParams,
     packages,
   };

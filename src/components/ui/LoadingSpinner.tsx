@@ -1,8 +1,10 @@
+import { cn } from "@/lib/utils";
+
 // components/LoadingSpinner.tsx
-const LoadingSpinner = () => {
+const LoadingSpinner: React.FC<{className?:String}> = ({className}) => {
     return (
-      <div className="flex justify-center items-center h-full">
-        <div className="spinner-border border-dashed animate-[spin_2.5s_alternate_infinite] inline-block w-8 h-8 border-4 rounded-full" role="status"></div>
+      <div>
+        <div className={"h-4 w-4 rounded-full border border-red-500 border-dashed animate-spin"} role="status"></div>
         <span className="sr-only">Loading...</span>
       </div>
     );

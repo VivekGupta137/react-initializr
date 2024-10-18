@@ -14,26 +14,26 @@ import ClosingBadge from "./ClosingBadge";
 const ShowActiveFilter = () => {
   const searchParams = useSearchParams();
   const depTags = searchParams.getAll("pkg");
-  const { removeSearchParam } = useMultiSearchParam();
+  const { removeSearchParam, clearAllSearchParam } = useMultiSearchParam();
   return (
-    <TooltipProvider>
+    depTags.length > 0 && <TooltipProvider>
       <div className="flex gap-2 text-muted-foreground items-center">
-
-        {depTags.length > 0 && <span className="text-sm">Active filters:</span>}
-      <div className="flex gap-2">
-        {depTags.map((tag) => (
-          <Tooltip key={tag}>
-            <TooltipTrigger>
-              <ClosingBadge onClick={() => removeSearchParam("pkg", tag)}>
-                {tag}
-              </ClosingBadge>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Remove {tag} filter</p>
-            </TooltipContent>
-          </Tooltip>
-        ))}
-      </div>
+        <span className="text-sm">Active filters:</span>
+        <div className="flex gap-2 flex-wrap">
+          {depTags.map((tag) => (
+            <Tooltip key={tag}>
+              <TooltipTrigger>
+                <ClosingBadge onClick={() => removeSearchParam("pkg", tag)}>
+                  {tag}
+                </ClosingBadge>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Remove {tag} filter</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+          <Badge variant={"secondary"} className="hover:bg-red-500 cursor-pointer py-0.5" onClick={()=> clearAllSearchParam("pkg")}>clear filters</Badge>
+        </div>
       </div>
     </TooltipProvider>
   );

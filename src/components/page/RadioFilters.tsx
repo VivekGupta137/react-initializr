@@ -3,6 +3,7 @@ import "server-only";
 import { filters } from "@/constants/filters";
 import FilterSection from "./filters/FilterSection";
 import SearchInput from "./search/SearchInput";
+import ShowActiveFilter from "./viewFilteredTemplate/ShowActiveFilter";
 
 const RadioFilters = async () => {
   return (
@@ -11,6 +12,7 @@ const RadioFilters = async () => {
         <h2 className="text-primary text-xl font-bold">Filters</h2>
         <SearchInput />
       </div>
+      <ShowActiveFilter />
       {filters.map(({ title, filters }) => (
         <div key={title}>
           <FilterSection title={title} filters={filters} />
