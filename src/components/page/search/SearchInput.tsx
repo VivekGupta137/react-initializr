@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { ArrowRight, ArrowRightIcon, SearchIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import InfoButton from "../infoDialog/InfoButton";
 import { toast } from "sonner";
 import z from "zod";
@@ -22,8 +22,8 @@ const SearchInput = () => {
     </div>
   );
   const [value, setValue] = useState<string>("");
-  const [endIcon, setEndIcon] = useState<React.ReactNode>(keyboard);
-
+  const [isPending, startTransition] = useTransition()
+  
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
@@ -73,7 +73,7 @@ const SearchInput = () => {
 
   return (
     <div className="flex gap-2 items-center">
-      <form className="flex" onSubmit={handleSubmit}>
+      <form className="flex" onSubmit={(e)=> startTransition(()=>handleSubmit(e))}>
         <Input
           ref={inputRef}
           autoFocus={true}
@@ -89,7 +89,9 @@ const SearchInput = () => {
         <Button
           variant={"outline"}
           className="p-0 text-primary rounded-l-none min-w-10"
-          aria-label=""
+          aria-label="submit"
+          disabled={isPending}
+          loading={isPending}
         >
           <ArrowRight className="size-4 text-primary" />
         </Button>

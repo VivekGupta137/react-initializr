@@ -1,13 +1,20 @@
 import { Badge, BadgeProps } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { updatePkgNames } from "@/lib/filterUtils";
-import { X } from "lucide-react";
+import { useTransition } from "react";
 
 type ClosingBadgeProps = BadgeProps;
 
 const ClosingBadge = (props: ClosingBadgeProps) => {
+  const [isPending, startTransition] = useTransition();
+
   return (
-    <Badge variant="secondary" closeable onClick={props.onClick}>
+    <Badge
+      variant="secondary"
+      closeable
+      onClick={() => startTransition(() => props.onClick())}
+      loading={isPending}
+      
+    >
       {updatePkgNames(props.children as string)}
     </Badge>
   );

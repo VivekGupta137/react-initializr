@@ -2,6 +2,7 @@
 
 import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { RadioGroup, Radio } from "@nextui-org/radio";
+import { Spinner } from "@nextui-org/spinner";
 import { useOptimistic, useTransition } from "react";
 import { FiLoader } from "react-icons/fi";
 
@@ -42,12 +43,13 @@ const FilterSection: React.FC<FilterSectionProps> = ({ title, filters }) => {
         <div className="flex gap-2">
           {title}{" "}
           {isPending ? (
-            <FiLoader className="size-5 animate-spinner-linear-spin text-muted-foreground" />
+            <Spinner size="sm" color="primary"/>
           ) : (
             ""
           )}
         </div>
       }
+      
       classNames={{
         label: "text-primary font-bold",
         wrapper: "flex gap-2 gap-4",

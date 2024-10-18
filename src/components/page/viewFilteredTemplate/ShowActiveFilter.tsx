@@ -11,11 +11,15 @@ import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { useSearchParams } from "next/navigation";
 import ClosingBadge from "./ClosingBadge";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTransition } from "react";
 
 const ShowActiveFilter = () => {
   const searchParams = useSearchParams();
   const depTags = searchParams.getAll("pkg");
   const { removeSearchParam, clearAllSearchParam } = useMultiSearchParam();
+  const handleClose = (tag: string) => {
+    removeSearchParam("pkg", tag)
+  }
   return (
     <AnimatePresence>
       {depTags.length > 0 && (
@@ -32,7 +36,7 @@ const ShowActiveFilter = () => {
                   <Tooltip key={tag}>
                     <TooltipTrigger>
                       <ClosingBadge
-                        onClick={() => removeSearchParam("pkg", tag)}
+                        onClick={()=> handleClose(tag)}
                       >
                         {tag}
                       </ClosingBadge>

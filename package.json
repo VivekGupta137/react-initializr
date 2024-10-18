@@ -17,6 +17,7 @@
     "@next/mdx": "^14.2.14",
     "@nextui-org/radio": "^2.1.5",
     "@nextui-org/react": "^2.4.8",
+    "@nextui-org/spinner": "^2.0.34",
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/theme": "^2.2.11",
     "@prisma/client": "^5.20.0",

@@ -3,6 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
+import { Spinner } from "@nextui-org/spinner";
 
 const badgeVariants = cva(
   "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
@@ -28,10 +29,11 @@ export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   closeable?: boolean;
+  loading?: boolean;
 }
 
 function Badge({ className, variant, ...props }: BadgeProps) {
-  const { closeable , children} = props;
+  const { closeable, loading = false, children } = props;
   return (
     <div
       className={cn(
@@ -41,10 +43,19 @@ function Badge({ className, variant, ...props }: BadgeProps) {
       )}
       {...props}
     >
-      <div className="py-0.5">
-        {children}
-      </div>
-      {closeable && <div className="group-hover:bg-red-500 rounded-sm rounded-l-none py-0.5 transition-all px-1"><X className="size-4" /></div>}
+      <div className="py-0.5">{children}</div>
+      {closeable && (
+        <div className={cn(
+          "rounded-sm rounded-l-none py-0.5 transition-all px-1 flex",
+          loading? "":"group-hover:bg-red-500"
+        )}>
+          {loading ? (<Spinner size="sm" color="primary" />
+            
+          ) : (
+            <X className="size-4" />
+          )}
+        </div>
+      )}
     </div>
   );
 }
