@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import RadioFilters from "@/components/page/RadioFilters";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/components/page/footer/Footer";
+import AddTemplate from "@/components/page/addTemplate/AddTemplate";
+import ViewFilterLoader from "@/components/page/viewFilteredTemplate/ViewFilterLoader";
 
 interface HomeProps {
   searchParams: Record<string, string>;
@@ -22,9 +24,18 @@ export default async function Home({ searchParams }: HomeProps) {
           </div>
 
           <div className="basis-1/2 shrink-0 my-10 lg:pl-5">
-            <Suspense fallback={<div>Loading...</div>}>
-              <ViewFilteredTemplate searchParams={searchParams} />
-            </Suspense>
+            <div className="flex flex-col gap-6">
+              <div className="flex justify-between border-b pb-2">
+                <h2 className="text-primary text-xl font-bold">Templates</h2>
+                <AddTemplate />
+              </div>
+              <Suspense
+                key={JSON.stringify(searchParams)}
+                fallback={<ViewFilterLoader />}
+              >
+                <ViewFilteredTemplate searchParams={searchParams} />
+              </Suspense>
+            </div>
           </div>
         </div>
 
