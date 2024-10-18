@@ -1,12 +1,8 @@
-import { Skeleton } from "@/components/ui/skeleton";
+"use client"
 
 export default function Loading() {
     // You can add any UI inside Loading, including a Skeleton.
-    return <div className="flex items-center space-x-4">
-    <Skeleton className="h-12 w-12 rounded-full" />
-    <div className="space-y-2">
-      <Skeleton className="h-4 w-[250px]" />
-      <Skeleton className="h-4 w-[200px]" />
-    </div>
+    return <div className="bg-[hsl(var(--background))] h-lvh w-full flex items-center justify-center">
+      <div className="h-5 w-5 rounded-full border-dashed border-4 animate-spinner-linear-spin border-[#58C4DC]"></div>
   </div>
   }

@@ -5,6 +5,7 @@ import FilterSection from "./filters/FilterSection";
 import SearchInput from "./search/SearchInput";
 import ShowActiveFilter from "./viewFilteredTemplate/ShowActiveFilter";
 import { LayoutGroup, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const RadioFilters = () => {
   return (
