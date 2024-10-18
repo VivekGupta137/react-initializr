@@ -2,6 +2,8 @@
 
 import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { RadioGroup, Radio } from "@nextui-org/radio";
+import { useOptimistic, useTransition } from "react";
+import { FiLoader } from "react-icons/fi";
 
 export interface FilterType {
   label: string;
@@ -16,22 +18,42 @@ interface FilterSectionProps {
 
 const FilterSection: React.FC<FilterSectionProps> = ({ title, filters }) => {
   const { updateSearchParam, packages } = useMultiSearchParam();
+  const [isPending, startTransition] = useTransition();
   const packageItem =
     filters.find((pack) =>
       packages.map(({ name }) => name).includes(pack.value)
     )?.value ?? "";
+
+  const [optimisticState, addOptimistic] = useOptimistic<string, string>(
+    packageItem,
+    (current, optimisticValue) => {
+      return optimisticValue;
+    }
+  );
+
   const handleToggle = (value: string) => {
+    addOptimistic(value);
     updateSearchParam("pkg", value, packageItem);
   };
+
   return (
     <RadioGroup
-      label={title}
+      label={
+        <div className="flex gap-2">
+          {title}{" "}
+          {isPending ? (
+            <FiLoader className="size-5 animate-spinner-linear-spin text-muted-foreground" />
+          ) : (
+            ""
+          )}
+        </div>
+      }
       classNames={{
         label: "text-primary font-bold",
         wrapper: "flex gap-2 gap-4",
       }}
-      value={packageItem}
-      onValueChange={handleToggle}
+      value={optimisticState}
+      onValueChange={(value) => startTransition(() => handleToggle(value))}
       orientation="horizontal"
     >
       {filters.map(({ label, value, icon }) => (

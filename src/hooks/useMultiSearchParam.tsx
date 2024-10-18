@@ -27,7 +27,7 @@ const useMultiSearchParam = () => {
     fields
       .filter((field) => field !== value)
       .forEach((field) => params.append(key, field));
-    router.replace(`?${params.toString()}`);
+    router.push(`?${params.toString()}`);
   };
 
   const updateSearchParam = (key: string, value: string, prev: string) => {

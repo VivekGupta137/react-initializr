@@ -20,7 +20,6 @@ export const getPkgFilters = (
     return andFilter(filters);
   } else {
     const { name, version } = extractPkgNameVersion(searchParams.pkg);
-    console.log({ name, version });
 
     const filter = makeDepFilter({ name, version });
     return filter;
