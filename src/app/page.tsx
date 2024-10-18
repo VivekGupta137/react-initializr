@@ -18,9 +18,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
         <div className="flex gap-0 sm:px-0 flex-col lg:flex-row pb-20 self-stretch grow">
           <div className="basis-1/2 shrink-0 my-10 lg:border-r-1">
-            <Suspense fallback={<div>Loading...</div>}>
-              <RadioFilters />
-            </Suspense>
+            <RadioFilters />
           </div>
 
           <div className="basis-1/2 shrink-0 my-10 lg:pl-5">

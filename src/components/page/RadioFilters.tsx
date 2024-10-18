@@ -6,7 +6,7 @@ import SearchInput from "./search/SearchInput";
 import ShowActiveFilter from "./viewFilteredTemplate/ShowActiveFilter";
 import { LayoutGroup, motion } from "framer-motion";
 
-const RadioFilters = async () => {
+const RadioFilters = () => {
   return (
     <div className="flex flex-col gap-6 lg:pr-5">
       <div className="flex justify-between border-b pb-2">
