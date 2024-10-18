@@ -13,7 +13,6 @@ const ClosingBadge = (props: ClosingBadgeProps) => {
       closeable
       onClick={(event) => startTransition(() => props.onClick?.(event))}
       loading={isPending}
-      
     >
       {updatePkgNames(props.children as string)}
     </Badge>

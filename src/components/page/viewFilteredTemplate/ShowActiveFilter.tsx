@@ -27,6 +27,7 @@ const ShowActiveFilter = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          layoutId={JSON.stringify(searchParams)}
         >
           <TooltipProvider>
             <div className="flex gap-2 text-muted-foreground items-start">

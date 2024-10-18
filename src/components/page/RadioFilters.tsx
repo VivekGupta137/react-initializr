@@ -5,9 +5,8 @@ import FilterSection from "./filters/FilterSection";
 import SearchInput from "./search/SearchInput";
 import ShowActiveFilter from "./viewFilteredTemplate/ShowActiveFilter";
 import { LayoutGroup, motion } from "framer-motion";
-import { useEffect, useState, useTransition } from "react";
 
-const RadioFilters = () => {
+const RadioFilters: React.FC<{searchParams: Record<string,string>}> = ({searchParams}) => {
   return (
     <div className="flex flex-col gap-6 lg:pr-5">
       <div className="flex justify-between border-b pb-2">
@@ -15,9 +14,7 @@ const RadioFilters = () => {
         <SearchInput />
       </div>
       <LayoutGroup>
-        <motion.div layoutId="123">
-          <ShowActiveFilter />
-        </motion.div>
+        <ShowActiveFilter />
         {filters.map(({ title, filters }) => (
           <motion.div key={title} layoutId={title}>
             <FilterSection title={title} filters={filters} />
