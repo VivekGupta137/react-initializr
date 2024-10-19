@@ -1,3 +1,4 @@
+"use client"
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { updatePkgNames } from "@/lib/filterUtils";
 import { useTransition } from "react";

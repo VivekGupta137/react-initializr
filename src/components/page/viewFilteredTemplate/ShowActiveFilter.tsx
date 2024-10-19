@@ -10,8 +10,7 @@ import {
 import useMultiSearchParam from "@/hooks/useMultiSearchParam";
 import { useSearchParams } from "next/navigation";
 import ClosingBadge from "./ClosingBadge";
-import { AnimatePresence, motion } from "framer-motion";
-import { useTransition } from "react";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 const ShowActiveFilter = () => {
   const searchParams = useSearchParams();
@@ -27,14 +26,17 @@ const ShowActiveFilter = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          layout
           layoutId={JSON.stringify(searchParams)}
         >
           <TooltipProvider>
             <div className="flex gap-2 text-muted-foreground items-start">
               <span className="text-sm shrink-0">Active filters:</span>
               <div className="flex gap-2 flex-wrap">
+                <motion.div layout className="flex gap-2 flex-wrap">
                 {depTags.map((tag) => (
-                  <Tooltip key={tag}>
+                  
+                    <Tooltip key={tag}>
                     <TooltipTrigger>
                       <ClosingBadge
                         onClick={()=> handleClose(tag)}
@@ -54,6 +56,7 @@ const ShowActiveFilter = () => {
                 >
                   clear filters
                 </Badge>
+                </motion.div>
               </div>
             </div>
           </TooltipProvider>

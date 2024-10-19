@@ -1,14 +1,12 @@
 "use client"
 import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@nextui-org/spinner";
 
 const ViewFilterLoader = () => {
   return (
-    <div>
-      <div className="flex flex-col space-y-3">
-        <Skeleton className="h-20 w-full rounded-none" />
-        <Skeleton className="h-20 w-full rounded-none" />
+    <div className="flex justify-center items-center h-full">
+        <Spinner size="md" color="primary" />
       </div>
-    </div>
   );
 };
 

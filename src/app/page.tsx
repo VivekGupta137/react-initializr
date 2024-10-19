@@ -24,7 +24,7 @@ export default async function Home({ searchParams }: HomeProps) {
           </div>
 
           <div className="basis-1/2 shrink-0 my-10 lg:pl-5">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 h-full">
               <div className="flex justify-between border-b pb-2">
                 <h2 className="text-primary text-xl font-bold">Templates</h2>
                 <AddTemplate />

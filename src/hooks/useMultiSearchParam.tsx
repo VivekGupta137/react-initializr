@@ -48,7 +48,7 @@ const useMultiSearchParam = () => {
         params.append(key, val);
       })
     }
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}`, {scroll: false});
   };
 
   const clearAllSearchParam = (key: string) => {

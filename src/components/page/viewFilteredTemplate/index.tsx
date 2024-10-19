@@ -14,11 +14,9 @@ const ViewFilteredTemplate = async ({
 }: {
   searchParams: Record<string, string>;
 }) => {
-  
-
   const getTemplates = cache(async (params) => {
     const filter = getPkgFilters(searchParams);
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // avoid abuse
+    // await new Promise((resolve) => setTimeout(resolve, 3000)); // avoid abuse
     const templates = await prisma.template.findMany({
       where: {
         ...filter,
