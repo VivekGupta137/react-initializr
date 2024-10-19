@@ -14,13 +14,7 @@ export type TemplateType = Awaited<ReturnType<typeof prisma.template.findMany>>;
 export async function GET(request: Request) {
   try {
     await DBConnect();
-    const templates = await prisma.template.findMany({
-        where: {
-            updatedAt: {
-                lt: new Date(new Date().getTime() - 1000)
-            }
-        },
-    });
+    const templates = await prisma.template.findMany();
     
     const ghUrls = templates.map(({ url }) => url);
 
@@ -42,6 +36,10 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         update: "success",
+        templates: {
+          count: templates.length,
+          ids: templates.map(({ id }) => id),
+        }
       },
       { status: 200 }
     );

@@ -6,7 +6,7 @@ import prisma from "../../prisma";
 import { DBConnect } from "@/lib/dbutils";
 import { revalidatePath } from "next/cache";
 import { metadata } from "@/app/layout";
-import { load_metadata } from "@/lib/dataUtils";
+import { load_metadata, processGitHubUrl, upsertTemplateMetadata } from "@/lib/dataUtils";
 
 export async function actionAddTemplate(
   data: z.infer<typeof templateFormSchema>
@@ -40,9 +40,6 @@ export async function actionAddTemplate(
         })),
       ]
     },
-    metadata: {
-      create: await load_metadata(data.url)
-    }
   };
 
   await DBConnect();
@@ -51,7 +48,10 @@ export async function actionAddTemplate(
     data: templateDoc,
   })
 
+  const templateMetadata = await processGitHubUrl(data.url, [template]);
+  await upsertTemplateMetadata(templateMetadata, template.id)
+
   await prisma.$disconnect();
   revalidatePath("/");
-  return { template };
+  return { success: true };
 }
