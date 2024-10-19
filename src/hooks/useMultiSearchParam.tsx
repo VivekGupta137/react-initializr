@@ -9,6 +9,11 @@ const useMultiSearchParam = () => {
     return extractPkgNameVersion(pkg);
   });
 
+  const resetPaginationParams = (params: URLSearchParams) => {
+    params.delete("skip");
+    params.delete("take");
+  }
+
   const addSearchParam = (key: string, value: string) => {
     const fields = searchParams.getAll(key);
     if (fields.includes(value)) return;
@@ -27,6 +32,7 @@ const useMultiSearchParam = () => {
     fields
       .filter((field) => field !== value)
       .forEach((field) => params.append(key, field));
+    resetPaginationParams(params)
     router.push(`?${params.toString()}`);
   };
 
@@ -48,12 +54,14 @@ const useMultiSearchParam = () => {
         params.append(key, val);
       })
     }
+    resetPaginationParams(params)
     router.push(`?${params.toString()}`, {scroll: false});
   };
 
   const clearAllSearchParam = (key: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.delete(key);
+    resetPaginationParams(params)
     router.push(`?${params.toString()}`);
   }
 

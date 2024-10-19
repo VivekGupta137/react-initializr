@@ -14,6 +14,7 @@ import { LuGitFork } from "react-icons/lu";
 import { FaCodeFork } from "react-icons/fa6";
 import { FaBinoculars } from "react-icons/fa6";
 import { PiBinocularsDuotone } from "react-icons/pi";
+import { TbLicense } from "react-icons/tb";
 type TemplateItemProps = {
   name: string;
   description?: string | null;
@@ -161,6 +162,14 @@ const TemplateItem = ({
                 </div>
                 <span className="text-sm text-muted-foreground">
                   {metadata?.language}
+                </span>
+              </div>
+            )}
+            {metadata?.license && (
+              <div className="flex gap-2 ml-3 items-center">
+                <TbLicense className="size-5 text-green-500" />
+                <span className="text-sm text-muted-foreground">
+                  {metadata?.license.toLocaleUpperCase()}
                 </span>
               </div>
             )}
