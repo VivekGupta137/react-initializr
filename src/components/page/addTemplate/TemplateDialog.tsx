@@ -21,8 +21,11 @@ const TemplateDialog = () => {
           <Button variant="outline" className="group px-2">
             <div className="flex gap-2 ">
               <PlusIcon className="size-5 text-green-600" />
-              <p className="text-muted-foreground group-hover:text-primary transition-all">
+              <p className="hidden sm:block text-muted-foreground group-hover:text-primary transition-all">
                 Submit your template
+              </p>
+              <p className="block sm:hidden text-muted-foreground group-hover:text-primary transition-all">
+                Share template
               </p>
             </div>
           </Button>

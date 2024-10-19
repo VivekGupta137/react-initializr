@@ -105,8 +105,8 @@ const TemplateItem = ({
   };
 
   return (
-    <div className="group border-b">
-      <div className="group-hover:bg-muted duration-200 flex">
+    <div className="group sm:border-b">
+      <div className="group-hover:bg-muted duration-200 flex flex-col sm:flex-row ">
         <div className="py-2 flex flex-col gap-2 px-3 grow shrink">
           <div className="flex gap-2 items-center">
             <div className="rounded-sm overflow-hidden">
@@ -129,7 +129,7 @@ const TemplateItem = ({
             </div>
           </div>
           <p className="text-muted-foreground">{description}</p>
-          <div className="flex">
+          <div className="flex justify-center sm:justify-start">
             <div className="flex gap-1 items-center ml-3">
               <PiStarFill className=" fill-yellow-300" width={30} />
               <span className="text-sm text-muted-foreground">
@@ -166,10 +166,11 @@ const TemplateItem = ({
             )}
           </div>
         </div>
-        <div className="rounded-md rounded-l-none pr-2 self-center shrink-0 basis-30">
+        <div className="rounded-md rounded-l-none sm:pr-2 sm:self-center shrink-0 basis-30">
           <CopyButton
             variant={"outline"}
             copyText={`git clone ${metadata?.cloneUrl ?? ""}`}
+            className="w-full"
           >
             Clone
           </CopyButton>

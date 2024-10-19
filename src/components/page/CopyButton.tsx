@@ -24,7 +24,7 @@ const CopyButton = (props: CopyButtonProps) => {
       variant={variant}
       onClick={handleCopy}
       disabled={copied}
-      className={cn(copied ? "disabled:opacity-100" : "")}
+      className={cn(copied ? "disabled:opacity-100" : "", props.className)}
     >
       {copied ? (
         "Copied 🎉"

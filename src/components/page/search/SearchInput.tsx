@@ -72,8 +72,8 @@ const SearchInput = () => {
   };
 
   return (
-    <div className="flex gap-2 items-center">
-      <form className="flex" onSubmit={(e)=> startTransition(()=>handleSubmit(e))}>
+    <div className="flex gap-2 items-center w-full">
+      <form className="flex grow" onSubmit={(e)=> startTransition(()=>handleSubmit(e))}>
         <Input
           ref={inputRef}
           autoFocus={true}
