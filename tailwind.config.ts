@@ -1,4 +1,4 @@
-import {nextui} from '@nextui-org/react';
+import { nextui } from "@nextui-org/react";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -7,27 +7,17 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-      sm: "640px", // tablet
-      md: "768px", // small laptop
-      lg: "1024px", // desktop
-      xl: "1280px", // large desktop
-      "2xl": "1536px", // extra large desktop
-    },
-	container: {
-		screens: {
-			'sm': '600px',
-			'md': '768px',
-			'lg': '1024px',
-			'xl': '1280px',
-			'2xl': '1600px',
-		}
-	},
-
     extend: {
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -99,6 +89,39 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'),require('tailwindcss-animate'),nextui()],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("tailwindcss-animate"),
+    nextui(),
+    function ({
+      addComponents,
+    }: {
+      addComponents: (components: Record<string, any>) => void;
+    }) {
+      addComponents({
+        ".container": {
+          width: "100%",
+          marginInline: "auto",
+          paddingInline: "0",
+          "@screen sm": {
+            maxWidth: "610px",
+            paddingInline: "0",
+          },
+          "@screen md": {
+            maxWidth: "738px",
+            paddingInline: "0",
+          },
+          "@screen lg": {
+            maxWidth: "1024px",
+            paddingInline: "0",
+          },
+          "@screen xl": {
+            maxWidth: "1140px",
+            paddingInline: "0",
+          },
+        },
+      });
+    },
+  ],
 };
 export default config;

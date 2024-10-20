@@ -1,20 +1,16 @@
 import "server-only";
-import { Card } from "@/components/ui/card";
 import CopyButton from "../CopyButton";
 import Link from "next/link";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { metadata } from "@/app/layout";
-import { Prisma } from "@prisma/client";
 import prisma from "../../../../prisma";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { PiStarFill } from "react-icons/pi";
 import { nFormatter } from "@/lib/filterUtils";
-import { LuGitFork } from "react-icons/lu";
 import { FaCodeFork } from "react-icons/fa6";
 import { FaBinoculars } from "react-icons/fa6";
-import { PiBinocularsDuotone } from "react-icons/pi";
-import { TbLicense } from "react-icons/tb";
+import { GoDotFill } from "react-icons/go";
+import { cn } from "@/lib/utils";
+import TemplateItemMeta from "./TemplateItemMeta";
 type TemplateItemProps = {
   name: string;
   description?: string | null;
@@ -106,8 +102,8 @@ const TemplateItem = ({
   };
 
   return (
-    <div className="group sm:border-b">
-      <div className="group-hover:bg-muted duration-200 flex flex-col sm:flex-row ">
+    <div className="group sm:border-b hover:bg-muted duration-200 mt-2">
+      <div className="flex flex-col sm:flex-row ">
         <div className="py-2 flex flex-col gap-2 px-3 grow shrink">
           <div className="flex gap-2 items-center">
             <div className="rounded-sm overflow-hidden">
@@ -130,52 +126,11 @@ const TemplateItem = ({
             </div>
           </div>
           <p className="text-muted-foreground">{description}</p>
-          <div className="flex justify-center sm:justify-start">
-            <div className="flex gap-1 items-center ml-3">
-              <PiStarFill className=" fill-yellow-300" width={30} />
-              <span className="text-sm text-muted-foreground">
-                {nFormatter(metadata?.starsCount ?? 0, 1)}
-              </span>
-            </div>
-            <div className="flex gap-1 items-center ml-3">
-              <FaCodeFork className="text-gray-500" width={30} />
-              <span className="text-sm text-muted-foreground">
-                {nFormatter(metadata?.forksCount ?? 0, 1)}
-              </span>
-            </div>
-            <div className="flex gap-1 items-center ml-3">
-              <FaBinoculars className="text-gray-500" width={30} />
-              <span className="text-sm text-muted-foreground">
-                {nFormatter(metadata?.watchersCount ?? 0, 1)}
-              </span>
-            </div>
-
-            {metadata?.language && (
-              <div className="flex gap-2 ml-3 items-center">
-                <div>
-                  <Image
-                    src={iconMap[metadata.language]}
-                    alt={metadata?.language ?? ""}
-                    width={18}
-                    height={18}
-                  />
-                </div>
-                <span className="text-sm text-muted-foreground">
-                  {metadata?.language}
-                </span>
-              </div>
-            )}
-            {metadata?.license && (
-              <div className="flex gap-2 ml-3 items-center">
-                <TbLicense className="size-5 text-green-500" />
-                <span className="text-sm text-muted-foreground">
-                  {metadata?.license.toLocaleUpperCase()}
-                </span>
-              </div>
-            )}
+          <div className="block sm:hidden">
+            <TemplateItemMeta metadata={metadata} />
           </div>
         </div>
-        <div className="rounded-md rounded-l-none sm:pr-2 sm:self-center shrink-0 basis-30">
+        <div className="rounded-md rounded-l-none sm:pr-2 sm:self-start sm:pt-2 shrink-0 basis-30 order">
           <CopyButton
             variant={"outline"}
             copyText={`git clone ${metadata?.cloneUrl ?? ""}`}
@@ -184,6 +139,9 @@ const TemplateItem = ({
             Clone
           </CopyButton>
         </div>
+      </div>
+      <div className="hidden sm:block mb-2">
+        <TemplateItemMeta metadata={metadata} />
       </div>
     </div>
   );
