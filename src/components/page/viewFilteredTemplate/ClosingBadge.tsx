@@ -11,7 +11,7 @@ const ClosingBadge = (props: ClosingBadgeProps) => {
   return (
     <Badge
       variant="secondary"
-      closeable
+      closeable      
       onClick={(event) => startTransition(() => props.onClick?.(event))}
       loading={isPending}
     >

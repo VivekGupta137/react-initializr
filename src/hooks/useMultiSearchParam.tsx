@@ -11,7 +11,6 @@ const useMultiSearchParam = () => {
 
   const resetPaginationParams = (params: URLSearchParams) => {
     params.delete("skip");
-    params.delete("take");
   }
 
   const addSearchParam = (key: string, value: string) => {

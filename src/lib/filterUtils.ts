@@ -1,3 +1,4 @@
+import { sortedBy, sortMap } from "@/constants/sortedBy";
 import { Prisma } from "@prisma/client";
 
 
@@ -5,6 +6,12 @@ import { Prisma } from "@prisma/client";
 export const cleanVersion = (version: string) => {
   return version.replace(/[^0-9.]/g, "");
 };
+
+export const getSortedBy = (searchParams: Record<string, string | string[]>) => {
+  const sortKey = searchParams.sortBy as keyof typeof sortMap ?? 'stars'
+  const sortValue = sortMap[sortKey] ?? 'starsCount';
+  return {sortKey, sortValue};
+}
 
 export const getPkgFilters = (
   searchParams: Record<string, string | string[]>

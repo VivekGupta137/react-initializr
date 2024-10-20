@@ -8,8 +8,9 @@ import {
   ChevronUpIcon,
 } from "@radix-ui/react-icons"
 import * as SelectPrimitive from "@radix-ui/react-select"
-
+import { RiSortNumberAsc , RiSortNumberDesc} from "react-icons/ri";
 import { cn } from "@/lib/utils"
+import { Spinner } from "@nextui-org/spinner";
 
 const Select = SelectPrimitive.Root
 
@@ -19,22 +20,31 @@ const SelectValue = SelectPrimitive.Value
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <SelectPrimitive.Trigger
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & { loading?: boolean, order?: 'asc' | 'desc', valueType?: 'string' | 'number' }
+>(({ className, children, ...props }, ref) => {
+  const { loading, order='desc', valueType='number', ...restProps } = props;
+  return <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex h-9 w-full gap-2 items-center justify-between whitespace-nowrap rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
-    {...props}
+    {...restProps}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <CaretSortIcon className="h-4 w-4 opacity-50" />
+      {loading ? (
+        <Spinner size="sm" className="opacity-50 pr-0" /> // Replace with your loader component
+      ) : (
+        valueType=='number' && <React.Fragment>
+            {order === 'asc' && <RiSortNumberAsc className="size-5 text-muted-foreground" />}
+            {order === 'desc' && <RiSortNumberDesc className="size-5 text-muted-foreground" />}
+
+        </React.Fragment>
+      )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
-))
+})
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
 const SelectScrollUpButton = React.forwardRef<

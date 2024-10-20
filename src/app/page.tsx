@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Footer from "@/components/page/footer/Footer";
 import AddTemplate from "@/components/page/addTemplate/AddTemplate";
 import ViewFilterLoader from "@/components/page/viewFilteredTemplate/ViewFilterLoader";
+import SortTemplates from "@/components/page/viewFilteredTemplate/sortTemplates";
 
 interface HomeProps {
   searchParams: Record<string, string>;
@@ -27,7 +28,9 @@ export default async function Home({ searchParams }: HomeProps) {
             <div className="flex flex-col gap-6 h-full">
               <div className="flex justify-between border-b pb-2">
                 <h2 className="text-primary text-xl font-bold">Templates</h2>
-                <AddTemplate />
+                <div className="flex gap-2">
+                  <AddTemplate />
+                </div>
               </div>
               <Suspense
                 key={JSON.stringify(searchParams)}
