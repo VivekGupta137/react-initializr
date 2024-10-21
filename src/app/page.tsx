@@ -45,7 +45,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
         <div className="fixed bottom-0 left-0 h-20 w-full">
           <div className="container m-auto sm:px-5 md:px-20 h-full relative ">
-          <div className="md:absolute pr-5 -translate-x-full bottom-5">
+          <div className="hidden md:block md:absolute pr-5 -translate-x-full bottom-5">
             <Link href="https://github.com/VivekGupta137/react-initializr" aria-label="github url" target="_blank">
               <GitHubLogoIcon className="size-10"/>
             </Link>
