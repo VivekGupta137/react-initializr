@@ -1,5 +1,14 @@
 import { FaVuejs } from "react-icons/fa";
-import { SiFirebase, SiFormik, SiMobx, SiMui, SiReacthookform, SiRedux, SiSnowpack, SiTurborepo } from "react-icons/si";
+import {
+  SiFirebase,
+  SiFormik,
+  SiMobx,
+  SiMui,
+  SiReacthookform,
+  SiRedux,
+  SiSnowpack,
+  SiTurborepo,
+} from "react-icons/si";
 import { SiDrizzle } from "react-icons/si";
 import { SiPrisma } from "react-icons/si";
 import { RiShieldKeyholeFill } from "react-icons/ri";
@@ -28,12 +37,12 @@ export const frameworkFilters: FilterType[] = [
   {
     value: "remix",
     label: "Remix",
-    icon: <RiRemixRunFill className="size-5" style={{ color: "#663399" }}/>,
+    icon: <RiRemixRunFill className="size-5" style={{ color: "#663399" }} />,
   },
   {
     value: "vue",
     label: "Vue.js",
-    icon: <FaVuejs className="size-5" style={{ color: "#42b883" }}/>,
+    icon: <FaVuejs className="size-5" style={{ color: "#42b883" }} />,
   },
   {
     value: "qwik",
@@ -43,7 +52,7 @@ export const frameworkFilters: FilterType[] = [
   {
     value: "svelte",
     label: "Svelte",
-    icon: <SiSvelte className="size-5" style={{ color: "#FF3E00" }}/>,
+    icon: <SiSvelte className="size-5" style={{ color: "#FF3E00" }} />,
   },
   {
     value: "",
@@ -54,7 +63,7 @@ export const cssFilters: FilterType[] = [
   {
     value: "tailwindcss",
     label: "Tailwind",
-    icon: <RiTailwindCssLine className="size-5" style={{ color: "#38B2AC" }}/>,
+    icon: <RiTailwindCssLine className="size-5" style={{ color: "#38B2AC" }} />,
   },
   {
     value: "@mui/material",
@@ -64,7 +73,7 @@ export const cssFilters: FilterType[] = [
   {
     value: "@chakra-ui",
     label: "Chakra UI",
-    icon: <SiChakraui className="size-5" style={{ color: "#319795" }}/>,
+    icon: <SiChakraui className="size-5" style={{ color: "#319795" }} />,
   },
   {
     value: "",
@@ -176,13 +185,21 @@ export const manageStateFilters: FilterType[] = [
     value: "",
     label: "Any",
   },
-]
+];
 export const formFilters: FilterType[] = [
-  { value: "react-hook-form", label: "React Hook Form", icon: <SiReacthookform className="size-5" style={{ color: "#EC5990" }} /> },
-  { value: "formik", label: "Formik", icon: <SiFormik className="size-5" style={{ color: "#FF7F50" }} /> },
+  {
+    value: "react-hook-form",
+    label: "React Hook Form",
+    icon: <SiReacthookform className="size-5" style={{ color: "#EC5990" }} />,
+  },
+  {
+    value: "formik",
+    label: "Formik",
+    icon: <SiFormik className="size-5" style={{ color: "#FF7F50" }} />,
+  },
   { value: "final-form", label: "Final Form" },
   { value: "", label: "Any" },
-]
+];
 export const filters = [
   {
     title: "Framework",
