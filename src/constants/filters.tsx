@@ -21,7 +21,6 @@ export const frameworkFilters: FilterType[] = [
     label: "Next.js",
     icon: <RiNextjsLine className="size-5" />,
   },
-  { value: "vue", label: "Vue", icon: <FaVuejs className="size-5" /> },
   {
     value: "remix",
     label: "Remix",

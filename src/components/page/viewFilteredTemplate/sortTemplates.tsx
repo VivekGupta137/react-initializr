@@ -23,7 +23,8 @@ const SortTemplates: React.FC<{ searchParams: Record<string, string> }> = ({
     const router = useRouter();
 
   return (
-    <Select value={searchKey} onValueChange={(value)=>{
+    <div>
+      <Select value={searchKey} onValueChange={(value)=>{
         startTransition(()=> {
             const params = new URLSearchParams({
                 ...searchParams,
@@ -32,7 +33,7 @@ const SortTemplates: React.FC<{ searchParams: Record<string, string> }> = ({
             router.push(`?${params.toString()}`)
         })
     }}>
-      <SelectTrigger loading={isPending} className="w-[full]">
+      <SelectTrigger loading={isPending} className="w-full">
         <SelectValue placeholder="Sort By" />
       </SelectTrigger>
       <SelectContent>
@@ -46,6 +47,7 @@ const SortTemplates: React.FC<{ searchParams: Record<string, string> }> = ({
         </SelectGroup>
       </SelectContent>
     </Select>
+    </div>
         
   );
 };

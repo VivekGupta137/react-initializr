@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import {
-  CaretSortIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -11,6 +10,9 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { RiSortNumberAsc , RiSortNumberDesc} from "react-icons/ri";
 import { cn } from "@/lib/utils"
 import { Spinner } from "@nextui-org/spinner";
+import { FaCodeFork } from "react-icons/fa6";
+import { FaClone } from "react-icons/fa";
+import { ChevronsUpDown } from "lucide-react";
 
 const Select = SelectPrimitive.Root
 
@@ -20,7 +22,7 @@ const SelectValue = SelectPrimitive.Value
 
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & { loading?: boolean, order?: 'asc' | 'desc', valueType?: 'string' | 'number' }
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & { loading?: boolean, order?: 'asc' | 'desc', valueType?: string | 'number' }
 >(({ className, children, ...props }, ref) => {
   const { loading, order='desc', valueType='number', ...restProps } = props;
   return <SelectPrimitive.Trigger
@@ -36,11 +38,16 @@ const SelectTrigger = React.forwardRef<
       {loading ? (
         <Spinner size="sm" className="opacity-50 pr-0" /> // Replace with your loader component
       ) : (
-        valueType=='number' && <React.Fragment>
+        valueType=='number' ? <React.Fragment>
             {order === 'asc' && <RiSortNumberAsc className="size-5 text-muted-foreground" />}
             {order === 'desc' && <RiSortNumberDesc className="size-5 text-muted-foreground" />}
-
-        </React.Fragment>
+        </React.Fragment>: 
+        valueType=='fork' ? <React.Fragment>
+        <FaCodeFork className="size-4 text-muted-foreground" />
+      </React.Fragment> : valueType=='clone' ? <React.Fragment>
+        <FaClone className="size-4 text-muted-foreground" />
+      </React.Fragment> : <ChevronsUpDown className="size-4 text-muted-foreground"/>
+        
       )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>

@@ -52,6 +52,8 @@ export const load_metadata = async (metadataUrl: string) => {
     htmlUrl: metadataJson.html_url,
     cloneUrl: metadataJson.clone_url,
     homepage: metadataJson.homepage ?? null,
+    templateLastUpdatedAt: metadataJson.updated_at,
+    full_name: metadataJson.full_name ?? null,
   } as Prisma.TemplateMetadataCreateInput;
 
   return requiredFields;

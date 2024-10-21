@@ -50,7 +50,8 @@ model TemplateMetadata {
   watchersCount Int?
 
   htmlUrl      String
-  cloneUrl    String
+  cloneUrl     String
+  full_name    String?
   homepage     String?
 
   orgName      String
@@ -58,6 +59,7 @@ model TemplateMetadata {
   repoName     String
 
   cloneCount   Int? @default(0)
+  templateLastUpdatedAt DateTime?
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

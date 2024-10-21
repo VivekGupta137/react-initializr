@@ -4,13 +4,10 @@ import { getPkgFilters, getSortedBy } from "@/lib/filterUtils";
 
 import TemplateItem from "./TemplateItem";
 
-import AddTemplate from "../addTemplate/AddTemplate";
-import { Suspense } from "react";
-import ViewFilterLoader from "./ViewFilterLoader";
 import { unstable_cache as cache } from "next/cache";
-import { Prisma } from "@prisma/client";
 import MyPagination from "./pagination";
 import SortTemplates from "./sortTemplates";
+import CloneForkButton from "./CloneForkButton";
 
 const ViewFilteredTemplate = async ({
   searchParams,
@@ -20,8 +17,8 @@ const ViewFilteredTemplate = async ({
   const take = Math.min(parseInt(searchParams.take) || 10, 25);
   const skip = parseInt(searchParams.skip) || 0;
 
-  const {sortValue} =  getSortedBy(searchParams);
-  
+  const { sortValue } = getSortedBy(searchParams);
+
   const getTemplates = cache(
     async (params) => {
       const filter = getPkgFilters(searchParams);
@@ -34,11 +31,13 @@ const ViewFilteredTemplate = async ({
         },
         take,
         skip,
-        orderBy: [{
-          metadata: {
-            [sortValue]: "desc"
-          }
-        }]
+        orderBy: [
+          {
+            metadata: {
+              [sortValue]: "desc",
+            },
+          },
+        ],
       };
       // await new Promise((resolve) => setTimeout(resolve, 3000)); // avoid abuse
       const [templates, count] = await prisma.$transaction([
@@ -58,15 +57,17 @@ const ViewFilteredTemplate = async ({
   return (
     <div className="flex flex-col w-full overflow-y-auto h-full">
       {count > 0 && (
-        <div className="flex justify-between items-end">
-          <div className="text-sm text-muted-foreground">
-            {count} found (viewing {skip + 1} to {Math.min(skip + take, count)})
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between  pr-2">
+          <div className="text-sm text-muted-foreground self-end pl-3">
+              {count} found (viewing {skip + 1} to{" "}
+              {Math.min(skip + take, count)})
+            </div>
+              <div className="flex gap-2">
+              <CloneForkButton />
+              <SortTemplates searchParams={searchParams} />
+              </div>
           </div>
-          <div className="flex gap-2 items-center pr-2">
-          <MyPagination {...{ take, skip, count, searchParams }} />
-          <SortTemplates searchParams={searchParams}/>
-          </div>
-          
         </div>
       )}
       {templates.map(({ name, description, url, metadata }) => (
@@ -76,9 +77,13 @@ const ViewFilteredTemplate = async ({
           url={url}
           description={description}
           metadata={metadata}
+          searchParams={searchParams}
         />
       ))}
       {templates.length === 0 && <div>No templates found</div>}
+      <div className="mt-2 ml-auto">
+        <MyPagination {...{ take, skip, count, searchParams }} />
+      </div>
     </div>
   );
 };

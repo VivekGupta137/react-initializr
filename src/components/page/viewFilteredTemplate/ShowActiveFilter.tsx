@@ -31,9 +31,9 @@ const ShowActiveFilter = () => {
         >
           <TooltipProvider>
             <div className="flex gap-2 text-muted-foreground items-start">
+              
+              <motion.div layout className="flex gap-2 flex-wrap">
               <span className="text-sm shrink-0">Active filters:</span>
-              <div className="flex gap-2 flex-wrap">
-                <motion.div layout className="flex gap-2 flex-wrap">
                 {depTags.map((tag) => (
                   
                     <Tooltip key={tag}>
@@ -57,7 +57,6 @@ const ShowActiveFilter = () => {
                   clear filters
                 </Badge>
                 </motion.div>
-              </div>
             </div>
           </TooltipProvider>
         </motion.div>
