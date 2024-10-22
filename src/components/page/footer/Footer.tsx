@@ -7,9 +7,9 @@ import Link from "next/link";
 import { github, linkedin, portfolio } from "@/constants/footerLinks";
 
 const Footer = () => {
-    return ( <div className="flex flex-col gap-2 items-center justify-center h-full text-muted-foreground">
+    return ( <div className="flex flex-col gap-2 items-center justify-center h-full text-muted-foreground relative">
         <p>Inspired by start.spring.io.</p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center ">
             <Link href={portfolio}>
                 <Button variant={"ghost"} className="p-0 h-5" aria-label="portfolio page"> <ExternalLink className="size-5" /> 
                 <div className="sr-only">About me</div>
@@ -25,7 +25,6 @@ const Footer = () => {
                 <div className="sr-only">Github profile</div>
                 </Button>
             </Link>
-            
         </div>
     </div> );
 }

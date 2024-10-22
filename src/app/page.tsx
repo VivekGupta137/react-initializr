@@ -8,7 +8,9 @@ import AddTemplate from "@/components/page/addTemplate/AddTemplate";
 import ViewFilterLoader from "@/components/page/viewFilteredTemplate/ViewFilterLoader";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-
+import { PiHandsClappingFill } from "react-icons/pi";
+import { FaHandsClapping } from "react-icons/fa6";
+import ClapCounter from "@/components/page/claps/ClapCounter";
 interface HomeProps {
   searchParams: Record<string, string>;
 }
@@ -50,6 +52,7 @@ export default async function Home({ searchParams }: HomeProps) {
               <GitHubLogoIcon className="size-10"/>
             </Link>
           </div>
+          <ClapCounter />
             <div className="w-full bg-[#23272F] h-full border-l border-r ">
               <Footer />
             </div>
