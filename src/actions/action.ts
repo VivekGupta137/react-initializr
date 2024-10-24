@@ -90,3 +90,36 @@ export const addClap = async () => {
     success: true,
   };
 };
+
+export type NPMResult = {
+  total: number;
+  results: [
+    {
+      package: {
+        name: string;
+        description: string;
+        version: string;
+      };
+      score: {
+        final: number;
+        detail: {
+          quality: number;
+          popularity: number;
+          maintenance: number;
+        }
+      };
+      flags: {
+        unstable: boolean;
+      };
+      searchScore: number;
+    }
+  ]
+}
+
+export const searchNPM = async (query: string, from: number) => {
+  const response = await fetch(
+    `https://api.npms.io/v2/search?q=${encodeURIComponent(query)}&size=10&from=${from}`
+  );
+  const data: NPMResult = await response.json();
+  return data;
+}
