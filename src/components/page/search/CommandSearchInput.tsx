@@ -152,7 +152,7 @@ const getPkgLink = (value: string) => {
                 }
               >
                 {results.results.map((result) => (
-                  <Link href={getPkgLink(result.package.name)}>
+                  <Link key={result.package.name} href={getPkgLink(result.package.name)}>
                     <CommandItem
                       key={result.package.name}
                       className="break-all w-full"
