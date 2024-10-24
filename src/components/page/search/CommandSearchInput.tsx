@@ -124,7 +124,7 @@ const getPkgLink = (value: string) => {
     );
 
   return (
-    <div className="max-w-[222px] h-30 group flex relative">
+    <div className="w-full sm:max-w-[222px] h-30 group flex relative">
       <Command shouldFilter={false} className="border">
         <CommandInput
           ref={inputRef}
@@ -136,8 +136,7 @@ const getPkgLink = (value: string) => {
           autoFocus
           endIcon={endIcon}
         />
-        <div className="">
-          <CommandList
+        <CommandList
             className={cn(
               "absolute top-[110%] left-0 w-full z-20 bg-[hsl(var(--background))] border rounded-md",
               inputValue.length == 0 || !results ? "hidden" : ""
@@ -148,7 +147,7 @@ const getPkgLink = (value: string) => {
                 heading={
                   <div className="flex items-center justify-between">
                     <span>Suggestions</span>
-                    {nFormatter(results.total, 1)}
+                    <span>{nFormatter(results.total, 1)} results found</span>
                   </div>
                 }
               >
@@ -172,7 +171,6 @@ const getPkgLink = (value: string) => {
               </CommandGroup>
             )}
           </CommandList>
-        </div>
       </Command>
     </div>
   );
