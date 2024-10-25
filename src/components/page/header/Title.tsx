@@ -3,7 +3,7 @@ import { FaReact } from "react-icons/fa";
 const Title = () => {
   return (
     <div className="p-2 flex flex-col gap-2">
-      <div className="flex text-4xl gap-2 items-center pt-5">
+      <div className="flex text-3xl sm:text-4xl gap-2 items-center pt-5">
         <FaReact strokeWidth={5} color="#58C4DC" className="text-5xl animate-[spin_5s_linear_infinite] "/>
         <h1 className="font-bold">
             <span>React Initializr</span>

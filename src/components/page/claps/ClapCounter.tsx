@@ -3,10 +3,16 @@ import { FaHandsClapping } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { addClap, getClaps } from "@/actions/action";
 import { useEffect, useState } from "react";
-
+import { Heart, StarIcon } from "lucide-react";
+import { HeartFilledIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import {motion} from "framer-motion";
+import SuperStar from "./SuperStar";
 const ClapCounter = () => {
   const [claps, setClaps] = useState(0);
-const userClapCount = typeof window !== "undefined" ? parseInt(localStorage.getItem("clapCount") as string) || 0 : 0;
+  const userClapCount =
+    typeof window !== "undefined"
+      ? parseInt(localStorage.getItem("clapCount") as string) || 0
+      : 0;
 
   useEffect(() => {
     getClaps().then((clapsCount) => {
@@ -15,22 +21,22 @@ const userClapCount = typeof window !== "undefined" ? parseInt(localStorage.getI
   }, []);
 
   return (
-    <div className="hidden md:block md:absolute pr-5 -translate-x-full -translate-y-full text-center">
+    <motion.div layout className="flex justify-center md:flex-col items-center gap-1">
       <Button
         size={"icon"}
         variant={"ghost"}
-        disabled={userClapCount >= 10 }
-        className="rounded-md p-0.5"
+        disabled={userClapCount >= 10}
+        className="rounded-md relative size-8"
         onClick={async () => {
           const clapsCount = await addClap();
           setClaps(clapsCount.clap);
           localStorage.setItem("clapCount", userClapCount + 1 + "");
         }}
       >
-        <FaHandsClapping className="size-10" />
+        <SuperStar />
       </Button>
-      <p>+{claps}</p>
-    </div>
+      {claps>0 && <p>+{claps}</p>}
+    </motion.div>
   );
 };
 
