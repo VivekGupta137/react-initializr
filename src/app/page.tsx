@@ -45,7 +45,7 @@ export default async function Home({ searchParams }: HomeProps) {
             </div>
           </div>
 
-          <div className="fixed bottom-0 left-0 h-20 w-full">
+          <div className="fixed bottom-0 left-0 h-20 w-full z-10">
             <div className="container m-auto sm:px-5 md:px-20 h-full relative ">
               <div className="hidden md:block md:absolute pr-5 -translate-x-full bottom-5">
                 <Link
