@@ -176,7 +176,7 @@ const CommandSearchInput = () => {
               <CommandGroup
                 heading={
                   <div className="flex items-center justify-between">
-                    <span>Suggestions</span>
+                    <span>Suggested packages</span>
                   </div>
                 }
               >
