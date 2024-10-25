@@ -49,7 +49,9 @@ const CommandSearchInput = () => {
   const searchParams = useSearchParams();
 
   const [results, setResults] = useState<NPMResult | null>(null);
+  const [items, setItems] = useState<NPMResult["results"] | []>([]);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const infLoader = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setDebouncedInputValue(inputValue);
@@ -66,6 +68,7 @@ const CommandSearchInput = () => {
       setResults(null);
       const response = await searchNPM(debouncedInputValue, 0);
       setResults(response);
+      if (response !== null) setItems(response.results);
       setIsLoading(false);
     };
 
@@ -89,6 +92,33 @@ const CommandSearchInput = () => {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        handleLoadMore();
+      }
+    });
+    if (infLoader.current) {
+      observer.observe(infLoader.current);
+    }
+
+    return () => observer.disconnect();
+  }, [infLoader, items]);
+
+  const handleLoadMore = async () => {
+    // setIsLoading(true);
+    const response = await searchNPM(debouncedInputValue, items.length);
+    if (response.results) {
+      if (response.results) {
+        setItems((prevItems: NPMResult["results"]) => [
+          ...prevItems,
+          ...response.results,
+        ]);
+      }
+    }
+    // setIsLoading(false);
+  };
+
   const keyboard = (
     <div>
       <div className="px-2">
@@ -100,14 +130,14 @@ const CommandSearchInput = () => {
     </div>
   );
 
-const getPkgLink = (value: string) => {
-    const fields = searchParams.getAll('pkg');
+  const getPkgLink = (value: string) => {
+    const fields = searchParams.getAll("pkg");
     fields.push(value);
     const params = new URLSearchParams(searchParams.toString());
-    params.delete('pkg');
-    fields.forEach((field) => params.append('pkg', field));
-    return `?${params.toString()}`
-}
+    params.delete("pkg");
+    fields.forEach((field) => params.append("pkg", field));
+    return `?${params.toString()}`;
+  };
 
   const endIcon =
     inputValue.length > 0 ? (
@@ -136,10 +166,10 @@ const getPkgLink = (value: string) => {
           autoFocus
           endIcon={endIcon}
         />
-        <CommandList
+        <div className={cn("absolute top-[110%] left-0 w-full z-20 bg-[hsl(var(--background))] border rounded-md", inputValue.length == 0 || !results ? "hidden" : "")}>
+          <CommandList
             className={cn(
-              "absolute top-[110%] left-0 w-full z-20 bg-[hsl(var(--background))] border rounded-md",
-              inputValue.length == 0 || !results ? "hidden" : ""
+              
             )}
           >
             {inputValue.length > 0 && results && (
@@ -147,12 +177,14 @@ const getPkgLink = (value: string) => {
                 heading={
                   <div className="flex items-center justify-between">
                     <span>Suggestions</span>
-                    <span>{nFormatter(results.total, 1)} results found</span>
                   </div>
                 }
               >
-                {results.results.map((result) => (
-                  <Link key={result.package.name} href={getPkgLink(result.package.name)}>
+                {items.map((result) => (
+                  <Link
+                    key={result.package.name}
+                    href={getPkgLink(result.package.name)}
+                  >
                     <CommandItem
                       key={result.package.name}
                       className="break-all w-full"
@@ -168,9 +200,18 @@ const getPkgLink = (value: string) => {
                     </CommandItem>
                   </Link>
                 ))}
+                {results.total > items.length && (
+                  <CommandItem ref={infLoader} className="flex justify-center">
+                    <Spinner size="md" />
+                  </CommandItem>
+                )}
               </CommandGroup>
             )}
           </CommandList>
+            <p className="text-xs py-0.5 text-end pr-1 border-t text-muted-foreground">
+            {nFormatter(results?.total ?? 0, 1)} results found <span className="inline-block"> (viewing 1 to {items.length})</span>
+            </p>
+        </div>
       </Command>
     </div>
   );

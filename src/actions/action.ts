@@ -93,28 +93,26 @@ export const addClap = async () => {
 
 export type NPMResult = {
   total: number;
-  results: [
-    {
-      package: {
-        name: string;
-        description: string;
-        version: string;
+  results: Array<{
+    package: {
+      name: string;
+      description: string;
+      version: string;
+    };
+    score: {
+      final: number;
+      detail: {
+        quality: number;
+        popularity: number;
+        maintenance: number;
       };
-      score: {
-        final: number;
-        detail: {
-          quality: number;
-          popularity: number;
-          maintenance: number;
-        }
-      };
-      flags: {
-        unstable: boolean;
-      };
-      searchScore: number;
-    }
-  ]
-}
+    };
+    flags: {
+      unstable: boolean;
+    };
+    searchScore: number;
+  }>;
+};
 
 export const searchNPM = async (query: string, from: number) => {
   const response = await fetch(
